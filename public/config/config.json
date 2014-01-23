@@ -1,0 +1,13 @@
+{
+  "root" : "/",
+  "title" : "Utils",
+  "sections" : [
+    {
+      "route" : "/test",
+      "model" : "src/app/models/pages/index",
+      "controller" : "src/app/controllers/pages/index",
+      "view" : "src/app/views/pages/index",
+      "dependency" : ""
+    }
+  ]
+}

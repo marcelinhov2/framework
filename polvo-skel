@@ -1,0 +1,81 @@
+#!/bin/sh
+
+# NOTES:
+# - This script takes only one argument (desired path to create the app)
+# - It uses uses coffeescript, stylus and jade to as sample files/code
+# - Its intended to be just an example for getting started, and nothing more
+# - For more info on Polvo, check the project Site and README:
+#     http://polvo.io
+#     https://github.com/polvo/polvo
+
+# USAGE
+# 1. Download this script and put it somewhere in your machine
+# 2. chmod +x ~/path/where/you/put/polvo-skel
+# 3. Run the script passing the path where the app should be created, i.e.:
+#        ~/path/where/you/put/polvo-skel ~/sample-project
+# 4. Visit http://localhost:3000
+
+# creating dirs
+# ------------------------------------------------------------------------------
+mkdir $1 && cd $1
+mkdir -p $PWD/{src/app,src/styles,src/templates,public}
+
+
+# creating html index file
+# ------------------------------------------------------------------------------
+echo "<html>
+<head>
+  <title></title>
+  <link rel='stylesheet' type='text/css' href='/app.css'>
+  <script type='text/javascript' src='http://code.jquery.com/jquery-2.0.3.min.js'></script>
+  <script type='text/javascript' src='/app.js'></script>
+</head>
+<body>
+</body>
+</html>" > $PWD/public/index.html
+
+
+# creating config file
+# ------------------------------------------------------------------------------
+echo "
+server:
+  root: ./public
+  port: 3000
+
+input:
+  - ./src
+
+output:
+  js: ./public/app.js
+  css: ./public/app.css
+
+boot: ./src/app/app
+
+" > $PWD/polvo.yml
+
+
+# creating script entry point
+# ------------------------------------------------------------------------------
+echo "
+template = require '../templates/main'
+
+\$(document).ready ->
+  \$('body').html template name: 'Bender'
+" > src/app/app.coffee
+
+
+# creating sample template
+# ------------------------------------------------------------------------------
+echo "h1 Hello World, #{name}" > src/templates/main.jade
+
+
+# creating sample style
+# ------------------------------------------------------------------------------
+echo "h1
+  color green
+" > src/styles/main.styl
+
+
+# starting app
+# ------------------------------------------------------------------------------
+cd $PWD && polvo -ws
