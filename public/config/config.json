@@ -1,6 +1,13 @@
 {
   "root" : "/",
   "title" : "Utils",
+  "services" : [
+    {
+      "name" : "get_number",
+      "url" : "http://echo.jsontest.com/key/:id",
+      "type" : "POST"
+    }
+  ],
   "sections" : [
     {
       "route" : "/test/:id",
@@ -10,10 +17,7 @@
       "template" : "src/app/templates/pages/index",
       "container" : "#wrap",
       "dependency" : "",
-      "service" : {
-        "url" : "http://echo.jsontest.com/key/:id",
-        "type" : "POST"
-      }
+      "dependency_service" : "get_number"
     }
   ]
 }

@@ -12,6 +12,8 @@ module.exports = class Router
     ways.use browser
     ways.mode 'run+destroy'
     
+    app.services = @config.services
+
     do @configureRoutes
     do @initWays
     

@@ -1,3 +1,5 @@
+_ = require("lodash")
+
 module.exports = class Model
   constructor: ->
 
@@ -5,9 +7,12 @@ module.exports = class Model
     do @mount_service_url
 
   mount_service_url: ->
+    @service = _.find app.services, {"name" : @config.dependency_service}
+    @config.service = @service
+
     for key, value of @params.params
       key = ":#{key}"
-      
+
       @config.service.url = @config.service.url.replace(key, value)
 
     do @request
