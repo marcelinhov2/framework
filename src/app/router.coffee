@@ -30,7 +30,7 @@ module.exports = class Router
     ways.init()
 
   instantiate: (params, done) =>
-    route_config = _.find @config.sections, { "route" : params.url }
+    route_config = _.find @config.sections, { "route" : params.pattern }
 
     Model = require route_config.model
     Controller = require route_config.controller
@@ -39,6 +39,8 @@ module.exports = class Router
     controller = new Controller
       model: new Model
       view: new View
+      config: route_config
+      params: params
     
   run: (params, done) ->
     do done
