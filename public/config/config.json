@@ -14,7 +14,7 @@
       "model" : "src/app/models/pages/index",
       "controller" : "src/app/controllers/pages/index",
       "view" : "src/app/views/pages/index",
-      "template" : "src/app/templates/pages/index",
+      "template" : "src/templates/pages/index",
       "container" : "#wrap",
       "dependency" : "",
       "dependency_service" : "get_number"
