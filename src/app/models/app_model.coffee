@@ -4,7 +4,10 @@ module.exports = class Model
   constructor: ->
 
   configure: (@config, @params, @data) ->
-    do @mount_service_url
+    if @config.dependency_service
+      do @mount_service_url
+    else
+      do @done
 
   mount_service_url: ->
     @service = _.find app.services, {"name" : @config.dependency_service}

@@ -43,7 +43,10 @@ module.exports = class Router
       template: Template
       config: route_config
       params: params
-    
+
+    $(window).unbind('view_rendered').bind 'view_rendered', (e, response) ->
+      do done
+
   run: (params, done) ->
     do done
 

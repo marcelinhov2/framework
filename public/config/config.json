@@ -10,13 +10,23 @@
   ],
   "sections" : [
     {
+      "route" : "/test",
+      "model" : "src/app/models/pages/container",
+      "controller" : "src/app/controllers/pages/container",
+      "view" : "src/app/views/pages/container",
+      "template" : "src/templates/pages/container",
+      "container" : "#wrap",
+      "dependency" : "",
+      "dependency_service" : ""
+    },
+    {
       "route" : "/test/:id",
       "model" : "src/app/models/pages/index",
       "controller" : "src/app/controllers/pages/index",
       "view" : "src/app/views/pages/index",
       "template" : "src/templates/pages/index",
-      "container" : "#wrap",
-      "dependency" : "",
+      "container" : "#pages_container",
+      "dependency" : "/test",
       "dependency_service" : "get_number"
     }
   ]

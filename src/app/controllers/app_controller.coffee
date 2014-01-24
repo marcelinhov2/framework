@@ -6,13 +6,13 @@ module.exports = class Controller
     do @configureModel
 
   configureModel: (data) ->
-    @options.model.configure @options.config, @options.params, data
     do @setModelTriggers
-
+    @options.model.configure @options.config, @options.params, data
+    
   setModelTriggers: ->
-    $(window).bind 'modelDone', @modelDone
-    $(window).bind 'modelFail', @modelFail
-    $(window).bind 'modelAlways', @modelAlways
+    $(window).unbind('modelDone').bind 'modelDone', @modelDone
+    $(window).unbind('modelFail').bind 'modelFail', @modelFail
+    $(window).unbind('modelAlways').bind 'modelAlways', @modelAlways
 
   modelDone: (e, response, textStatus, jqXHR) =>
     @createView response
