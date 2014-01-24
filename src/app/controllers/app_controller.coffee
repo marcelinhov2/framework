@@ -1,17 +1,12 @@
 module.exports = class Controller
-  constructor: (options) ->
-    @view = options.view
-    @model = options.model
-    @config = options.config
-    @params = options.params
-
+  constructor: (@options) ->
     do @init
 
   init: ->
     do @configureModel
 
   configureModel: (data) ->
-    @model.configure @config, @params, data
+    @options.model.configure @options.config, @options.params, data
     do @setModelTriggers
 
   setModelTriggers: ->
@@ -19,8 +14,10 @@ module.exports = class Controller
     $(window).bind 'modelFail', @modelFail
     $(window).bind 'modelAlways', @modelAlways
 
-  modelDone: (e, response, textStatus, jqXHR) ->
-    console.log 'view'
-    console.log response
+  modelDone: (e, response, textStatus, jqXHR) =>
+    @createView response
 
-  modelFail: (e, jqXHR, textStatus, errorThrown) ->
+  modelFail: (e, jqXHR, textStatus, errorThrown) =>
+
+  createView: (response) ->
+    @options.view.init @options, response

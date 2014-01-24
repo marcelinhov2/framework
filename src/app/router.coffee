@@ -5,8 +5,6 @@ _ = require("lodash")
 
 module.exports = class Router
 
-  constructor: ->
-    
   init: (@config) ->
     do @configureWays
 
@@ -35,10 +33,12 @@ module.exports = class Router
     Model = require route_config.model
     Controller = require route_config.controller
     View = require route_config.view
+    Template = require route_config.template
 
     controller = new Controller
       model: new Model
       view: new View
+      template: Template
       config: route_config
       params: params
     

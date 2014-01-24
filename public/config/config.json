@@ -7,6 +7,8 @@
       "model" : "src/app/models/pages/index",
       "controller" : "src/app/controllers/pages/index",
       "view" : "src/app/views/pages/index",
+      "template" : "src/app/templates/pages/index",
+      "container" : "#wrap",
       "dependency" : "",
       "service" : {
         "url" : "http://echo.jsontest.com/key/:id",
