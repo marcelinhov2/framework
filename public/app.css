@@ -89,6 +89,11 @@ h1 {
 
 /* line 12 : /usr/local/lib/node_modules/polvo/node_modules/polvo-stylus/node_modules/nib/lib/nib/size.styl */
 
+/* line 1 : /Users/marcelo.andrade/Workspace/study/framework/src/styles/pages/container.styl */
+#pages_container {
+  display: none;
+}
+
 
 /* line 1 : /usr/local/lib/node_modules/polvo/node_modules/polvo-stylus/node_modules/stylus/lib/functions/index.styl */
 
@@ -131,3 +136,8 @@ h1 {
 /* line 574 : /usr/local/lib/node_modules/polvo/node_modules/polvo-stylus/node_modules/nib/lib/nib/config.styl */
 
 /* line 12 : /usr/local/lib/node_modules/polvo/node_modules/polvo-stylus/node_modules/nib/lib/nib/size.styl */
+
+/* line 1 : /Users/marcelo.andrade/Workspace/study/framework/src/styles/pages/index.styl */
+#pages_index {
+  display: none;
+}
