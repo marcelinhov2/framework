@@ -54,13 +54,13 @@ module.exports = class View
   before_out: ->
     # console.log 'before_out'
   
-  out: ->
+  out: (callback) ->
     @before_out?()
 
     $(@el).fadeOut( => 
       @after_out?()
 
-      do @destroy
+      @destroy callback
     )
 
   after_out: ->

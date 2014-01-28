@@ -21,3 +21,6 @@ module.exports = class Controller
 
   createView: (response) ->
     @options.view.init @options, response
+
+  destroyView: (callback) ->
+    @options.view.out callback

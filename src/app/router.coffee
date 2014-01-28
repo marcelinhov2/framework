@@ -5,6 +5,8 @@ _ = require("lodash")
 
 module.exports = class Router
 
+  instantiated_controllers: []
+
   init: (@config) ->
     do @configureWays
 
@@ -44,11 +46,20 @@ module.exports = class Router
       config: route_config
       params: params
 
+    @instantiated_controllers.push
+      instance: controller
+      pattern: params.pattern      
+
     $(window).unbind('view_rendered').bind 'view_rendered', (e, response) ->
       do done
 
   run: (params, done) ->
     do done
 
-  destroy: (params, done) ->
-    do done
+  destroy: (params, done) =>
+    controller = _.find @instantiated_controllers, { "pattern" : params.pattern }
+    controller = controller.instance
+
+    controller.destroyView => 
+      @instantiated_controllers.pop controller
+      do done
