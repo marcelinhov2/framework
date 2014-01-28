@@ -4,8 +4,13 @@
   "services" : [
     {
       "name" : "get_number",
-      "url" : "http://echo.jsontest.com/key/:id",
-      "type" : "POST"
+      "url" : "http://echo.jsontest.com/{method}/{value}",
+      "type" : "REST",
+      "method" : "POST",
+      "vars" : {
+        "method" : "key",
+        "value"  : ":id"
+      }
     }
   ],
   "sections" : [
@@ -20,7 +25,7 @@
       "dependency_service" : ""
     },
     {
-      "route" : "/test/:id",
+      "route" : "/:method/:id",
       "model" : "src/app/models/pages/index",
       "controller" : "src/app/controllers/pages/index",
       "view" : "src/app/views/pages/index",
