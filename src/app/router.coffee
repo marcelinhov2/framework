@@ -48,7 +48,7 @@ module.exports = class Router
 
     @instantiated_controllers.push
       instance: controller
-      pattern: params.pattern      
+      url: params.url
 
     $(window).unbind('view_rendered').bind 'view_rendered', (e, response) ->
       do done
@@ -57,7 +57,7 @@ module.exports = class Router
     do done
 
   destroy: (params, done) =>
-    controller = _.find @instantiated_controllers, { "pattern" : params.pattern }
+    controller = _.find @instantiated_controllers, { "url" : params.url }
     controller = controller.instance
 
     controller.destroyView => 
