@@ -50,7 +50,7 @@ module.exports = class Router
       instance: controller
       url: params.url
 
-    $(window).unbind('view_rendered').bind 'view_rendered', (e, response) ->
+    $(window).unbind('view_rendered').bind 'view_rendered', (e, response) =>
       do done
 
   run: (params, done) ->
@@ -61,5 +61,5 @@ module.exports = class Router
     controller = controller.instance
 
     controller.destroyView => 
-      @instantiated_controllers.pop controller
+      @instantiated_controllers = _.reject(@instantiated_controllers, { "url" : params.url })
       do done

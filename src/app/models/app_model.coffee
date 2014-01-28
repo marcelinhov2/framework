@@ -16,13 +16,13 @@ module.exports = class Model
     for key, value of @params.params
       key = ":#{key}"
 
-      @config.service.url = @config.service.url.replace(key, value)
+      service_url = @config.service.url.replace(key, value)
 
-    do @request
+    @request service_url
 
-  request: ->
+  request: (url) ->
     req = $.ajax
-      url: @config.service.url
+      url: url
       type: @config.service.type
 
     req.done (response, textStatus, jqXHR) =>

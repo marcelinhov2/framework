@@ -138,6 +138,6 @@ h1 {
 /* line 12 : /usr/local/lib/node_modules/polvo/node_modules/polvo-stylus/node_modules/nib/lib/nib/size.styl */
 
 /* line 1 : /Users/marcelo.andrade/Workspace/study/framework/src/styles/pages/index.styl */
-#pages_index {
+.pages {
   display: none;
 }

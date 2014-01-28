@@ -1,8 +1,14 @@
 - var data = this.view.data
+- var url_params = this.view.options.params.params
 
-#pages_index
+div(class="pages", id="pages_index_#{url_params.id}")
   h2 primeira view
   h3 #{data.key}
 
-  a(href="/test") testando
-  a(href="/test/two") testando2
+  ul
+    li
+      a(href="/test") testando
+    li
+      a(href="/test/one") testando1
+    li
+      a(href="/test/two") testando2
