@@ -32,7 +32,7 @@ module.exports = class Model
 
       service_url = @config.service.url.replace("{#{key}}", value)
       
-    @request service_url
+    @request_REST service_url
 
   replace: (param) ->
     param = param.replace(':', '')
@@ -40,7 +40,7 @@ module.exports = class Model
 
     return param
 
-  request: (url) ->
+  request_REST: (url) ->
     req = $.ajax
       url: url
       type: @config.service.method
