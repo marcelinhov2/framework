@@ -12,7 +12,7 @@ module.exports = class Router
 
   configureWays: ->
     ways.use browser
-    ways.mode 'run+destroy'
+    ways.mode @config.mode
     
     app.services = @config.services
 
