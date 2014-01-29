@@ -39,27 +39,35 @@ module.exports = class Model
     @request_REST service_url
 
   JSON: ->
-    do @request_JSON
+    data = Object.create(@config.service.vars)
+
+    for key, value of data
+
+      if (value.indexOf(':') >= 0)
+        data.value = @replace(value)
+
+    @request_JSON data
 
   URL_VARS: ->
-    data = ''
+    data = Object.create(@config.service.vars)
+
+    for key, value of data
+
+      if (value.indexOf(':') >= 0)
+        data.value = @replace(value)
+
+    url_data = ''
     i = 0
 
-    for key, value of @config.service.vars
-      data += "#{key}=#{value}"
+    for key, value of data
+      url_data += "#{key}=#{value}"
 
       if i < ( Object.keys(@config.service.vars).length - 1 )
-        data += "&"
+        url_data += "&"
 
       i++
 
-    @request_URL_VARS data
-
-  replace: (param) ->
-    param = param.replace(':', '')
-    param = @params.params[param]
-
-    return param
+    @request_URL_VARS url_data
 
   request_REST: (url) ->
     req = $.ajax
@@ -72,11 +80,11 @@ module.exports = class Model
     req.fail (jqXHR, textStatus, errorThrown) =>
       @fail jqXHR, textStatus, errorThrown
 
-  request_JSON: ->
+  request_JSON: (data) ->
     req = $.ajax
       url: @config.service.url
       type: @config.service.method
-      data: @config.service.vars
+      data: data
 
     req.done (response, textStatus, jqXHR) =>
       @done response, textStatus, jqXHR
@@ -94,6 +102,12 @@ module.exports = class Model
 
     req.fail (jqXHR, textStatus, errorThrown) =>
       @fail jqXHR, textStatus, errorThrown
+
+  replace: (param) ->
+    param = param.replace(':', '')
+    param = @params.params[param]
+
+    return param
 
   done: (response, textStatus, jqXHR) ->
     $(window).trigger 'modelDone', [response, textStatus, jqXHR]

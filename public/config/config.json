@@ -1,6 +1,6 @@
 {
   "root" : "/",
-  "mode" : "destroy+run",
+  "mode" : "run+destroy",
   "title" : "Utils",
   "services" : [
     {
@@ -20,7 +20,7 @@
       "method" : "POST",
       "vars" : {
         "method" : "key",
-        "value"  : "teste"
+        "value"  : ":id"
       }
     },
     {
@@ -30,7 +30,7 @@
       "method" : "POST",
       "vars" : {
         "method" : "key",
-        "value"  : "teste"
+        "value"  : ":id"
       }
     }
   ],
@@ -53,7 +53,7 @@
       "template" : "src/templates/pages/index",
       "container" : "#pages_container",
       "dependency" : "/test",
-      "dependency_service" : "get_number"
+      "dependency_service" : "get_response"
     }
   ]
 }
