@@ -18,6 +18,8 @@ module.exports = class Model
     switch @config.service.type
       when 'REST'
         do @REST
+      when 'JSON'
+        do @JSON
 
   REST: ->
     service_url = ''
@@ -34,11 +36,26 @@ module.exports = class Model
       
     @request_REST service_url
 
+  JSON: ->
+    @request_JSON @config.service.url
+
   replace: (param) ->
     param = param.replace(':', '')
     param = @params.params[param]
 
     return param
+
+  request_JSON: (url) ->
+    req = $.ajax
+      url: url
+      type: @config.service.method
+      data: @config.service.vars
+
+    req.done (response, textStatus, jqXHR) =>
+      @done response, textStatus, jqXHR
+
+    req.fail (jqXHR, textStatus, errorThrown) =>
+      @fail jqXHR, textStatus, errorThrown
 
   request_REST: (url) ->
     req = $.ajax
