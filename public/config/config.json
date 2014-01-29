@@ -21,6 +21,16 @@
         "method" : "key",
         "value"  : "teste"
       }
+    },
+    {
+      "name" : "get_response",
+      "url" : "http://ip.jsontest.com",
+      "type" : "URL_VARS",
+      "method" : "POST",
+      "vars" : {
+        "method" : "key",
+        "value"  : "teste"
+      }
     }
   ],
   "sections" : [
@@ -42,7 +52,7 @@
       "template" : "src/templates/pages/index",
       "container" : "#pages_container",
       "dependency" : "/test",
-      "dependency_service" : "get_json"
+      "dependency_service" : "get_response"
     }
   ]
 }

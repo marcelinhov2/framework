@@ -20,6 +20,8 @@ module.exports = class Model
         do @REST
       when 'JSON'
         do @JSON
+      when 'URL_VARS'
+        do @URL_VARS
 
   REST: ->
     service_url = ''
@@ -37,7 +39,21 @@ module.exports = class Model
     @request_REST service_url
 
   JSON: ->
-    @request_JSON @config.service.url
+    do @request_JSON
+
+  URL_VARS: ->
+    data = ''
+    i = 0
+
+    for key, value of @config.service.vars
+      data += "#{key}=#{value}"
+
+      if i < ( Object.keys(@config.service.vars).length - 1 )
+        data += "&"
+
+      i++
+
+    @request_URL_VARS data
 
   replace: (param) ->
     param = param.replace(':', '')
@@ -45,9 +61,20 @@ module.exports = class Model
 
     return param
 
-  request_JSON: (url) ->
+  request_REST: (url) ->
     req = $.ajax
       url: url
+      type: @config.service.method
+
+    req.done (response, textStatus, jqXHR) =>
+      @done response, textStatus, jqXHR
+
+    req.fail (jqXHR, textStatus, errorThrown) =>
+      @fail jqXHR, textStatus, errorThrown
+
+  request_JSON: ->
+    req = $.ajax
+      url: @config.service.url
       type: @config.service.method
       data: @config.service.vars
 
@@ -57,9 +84,9 @@ module.exports = class Model
     req.fail (jqXHR, textStatus, errorThrown) =>
       @fail jqXHR, textStatus, errorThrown
 
-  request_REST: (url) ->
+  request_URL_VARS: (data) ->
     req = $.ajax
-      url: url
+      url: @config.service.url + "?" + data
       type: @config.service.method
 
     req.done (response, textStatus, jqXHR) =>
