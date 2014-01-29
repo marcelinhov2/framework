@@ -53,7 +53,7 @@
       "template" : "src/templates/pages/index",
       "container" : "#pages_container",
       "dependency" : "/test",
-      "dependency_service" : "get_response"
+      "dependency_service" : "get_number"
     }
   ]
 }

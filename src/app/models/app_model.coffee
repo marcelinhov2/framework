@@ -74,11 +74,7 @@ module.exports = class Model
       url: url
       type: @config.service.method
 
-    req.done (response, textStatus, jqXHR) =>
-      @done response, textStatus, jqXHR
-
-    req.fail (jqXHR, textStatus, errorThrown) =>
-      @fail jqXHR, textStatus, errorThrown
+    @request_handler req
 
   request_JSON: (data) ->
     req = $.ajax
@@ -86,17 +82,16 @@ module.exports = class Model
       type: @config.service.method
       data: data
 
-    req.done (response, textStatus, jqXHR) =>
-      @done response, textStatus, jqXHR
-
-    req.fail (jqXHR, textStatus, errorThrown) =>
-      @fail jqXHR, textStatus, errorThrown
+    @request_handler req
 
   request_URL_VARS: (data) ->
     req = $.ajax
       url: @config.service.url + "?" + data
       type: @config.service.method
 
+    @request_handler req
+
+  request_handler: (req) ->
     req.done (response, textStatus, jqXHR) =>
       @done response, textStatus, jqXHR
 
