@@ -3,6 +3,7 @@ module.exports = class Controller
     do @init
 
   init: ->
+    $(window).trigger 'show_loader'
     do @configureModel
 
   configureModel: (data) ->

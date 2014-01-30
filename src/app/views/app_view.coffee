@@ -8,12 +8,15 @@ module.exports = class View
     do @set_container
     do @render
 
-  set_container: ->
-    @container = @options.config.container
+  set_triggers: ->
+    $(window).unbind('show_loader').bind 'show_loader', @show_loader
+    $(window).unbind('hide_loader').bind 'hide_loader', @hide_loader
 
-  internalNavigation: ->
     @el.find( 'a[href^="/"]' ).each ( index, item ) =>
       @navigate item
+
+  set_container: ->
+    @container = @options.config.container
 
   navigate: (item) ->
     $( item ).click ( event ) =>
@@ -33,7 +36,7 @@ module.exports = class View
     ), 100
 
   after_render: () ->
-    do @internalNavigation
+    do @set_triggers
     do @in
 
   before_in: ->
@@ -80,3 +83,9 @@ module.exports = class View
 
   after_destroy: ->
     # console.log 'after_destroy'
+
+  show_loader: ->
+    console.log 'show_loader'
+
+  hide_loader: ->
+    console.log 'hide_loader'
