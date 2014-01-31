@@ -66,4 +66,5 @@ module.exports = class Router
 
     controller.destroyView => 
       @instantiated_controllers = _.reject(@instantiated_controllers, { "url" : params.url })
+      controller = null
       do done
