@@ -16,7 +16,7 @@ module.exports = class View
       @navigate item
 
   set_container: ->
-    @container = @options.config.container
+    @container = $(@options.config.container)
 
   navigate: (item) ->
     $( item ).click ( event ) =>
