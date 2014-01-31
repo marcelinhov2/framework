@@ -3,7 +3,7 @@ module.exports = class Controller
 
   init: (@options) =>
     # console.log @options.params
-    
+
     $(window).trigger 'show_loader'
     do @configureModel
 
@@ -25,4 +25,4 @@ module.exports = class Controller
     @options.view.init @options, response
 
   destroyView: (callback) ->
-    @options.view.out callback
+    @options.currentView.out callback

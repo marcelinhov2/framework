@@ -32,8 +32,6 @@ module.exports = class Router
     ways.init()
 
   instantiate: (params, done) =>
-    console.log 'run'
-
     route_config = _.find @config.sections, { "route" : params.pattern }
 
     unless _.find @instantiated_controllers, { "pattern" : route_config.route }
@@ -58,9 +56,11 @@ module.exports = class Router
 
     if typeof Controller is 'function'
       controller = new Controller
+      options.currentView = options.view
     else
       @instantiated_controllers = _.reject(@instantiated_controllers, { "url" : params.url })
-      controller = Object.create(controller.controller)
+      controller = controller.controller
+      options.currentView = controller.options.view
 
     controller.init(options)
 
@@ -76,11 +76,7 @@ module.exports = class Router
     do done
 
   destroy: (params, done) =>
-    console.log 'destroy'
-
     the_controller = _.find @instantiated_controllers, { "url" : params.url }
-
-    console.log the_controller
 
     controller = the_controller.controller
 
