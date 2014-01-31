@@ -85,7 +85,7 @@ module.exports = class View
     # console.log 'after_destroy'
 
   show_loader: ->
-    console.log 'show_loader'
+    # console.log 'show_loader'
 
   hide_loader: ->
-    console.log 'hide_loader'
+    # console.log 'hide_loader'

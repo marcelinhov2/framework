@@ -37,20 +37,22 @@
   "sections" : [
     {
       "route" : "/test",
-      "model" : "src/app/models/pages/container",
-      "controller" : "src/app/controllers/pages/container",
+      "model" : "src/app/models/pages",
+      "controller" : "src/app/controllers/pages",
       "view" : "src/app/views/pages/container",
       "template" : "src/templates/pages/container",
+      "method" : "container",
       "container" : "#wrap",
       "dependency" : "",
       "dependency_service" : ""
     },
     {
       "route" : "/:method/:id",
-      "model" : "src/app/models/pages/index",
-      "controller" : "src/app/controllers/pages/index",
+      "model" : "src/app/models/pages",
+      "controller" : "src/app/controllers/pages",
       "view" : "src/app/views/pages/index",
       "template" : "src/templates/pages/index",
+      "method" : "index",
       "container" : "#pages_container",
       "dependency" : "/test",
       "dependency_service" : "get_number"

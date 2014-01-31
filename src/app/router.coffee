@@ -32,17 +32,23 @@ module.exports = class Router
     ways.init()
 
   instantiate: (params, done) =>
+    console.log 'run'
+
     route_config = _.find @config.sections, { "route" : params.pattern }
 
+    unless _.find @instantiated_controllers, { "pattern" : route_config.route }
+      Controller = require route_config.controller
+    else
+      controller = _.find @instantiated_controllers, { "pattern" : route_config.route }
+
     Model = require route_config.model
-    Controller = require route_config.controller
     View = require route_config.view
     Template = require route_config.template
 
     if route_config.dependency.length
       dependency_controller = _.find @instantiated_controllers, { "url" : route_config.dependency }
 
-    controller = new Controller
+    options = 
       model: new Model
       view: new View
       template: Template
@@ -50,9 +56,18 @@ module.exports = class Router
       params: params
       dependency: if dependency_controller? then dependency_controller else ''
 
+    if typeof Controller is 'function'
+      controller = new Controller
+    else
+      @instantiated_controllers = _.reject(@instantiated_controllers, { "url" : params.url })
+      controller = Object.create(controller.controller)
+
+    controller.init(options)
+
     @instantiated_controllers.push
       controller: controller
       url: params.url
+      pattern: route_config.route
 
     $(window).unbind('view_rendered').bind 'view_rendered', (e, response) =>
       do done
@@ -61,7 +76,12 @@ module.exports = class Router
     do done
 
   destroy: (params, done) =>
+    console.log 'destroy'
+
     the_controller = _.find @instantiated_controllers, { "url" : params.url }
+
+    console.log the_controller
+
     controller = the_controller.controller
 
     controller.destroyView => 

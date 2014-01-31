@@ -1,8 +1,9 @@
 module.exports = class Controller
   constructor: (@options) ->
-    do @init
 
-  init: ->
+  init: (@options) =>
+    # console.log @options.params
+    
     $(window).trigger 'show_loader'
     do @configureModel
 
